@@ -1,3 +1,4 @@
+# coding=utf-8
 ###########################################################################
 #  Vintel - Visual Intel Chat Analyzer									  #
 #  Copyright (C) 2014-15 Sebastian Meyer (sparrow.242.de+eve@gmail.com )  #
@@ -33,7 +34,7 @@ from .parser_functions import parseStatus
 from .parser_functions import parseUrls, parseShips, parseSystems
 
 # Names the local chatlogs could start with (depends on l10n of the client)
-LOCAL_NAMES = ("Local", "Lokal", six.text_type("\u041B\u043E\u043A\u0430\u043B\u044C\u043D\u044B\u0439"))
+LOCAL_NAMES = ("Local", "Lokal", six.text_type("\u041B\u043E\u043A\u0430\u043B\u044C\u043D\u044B\u0439"), "本地")
 
 
 class ChatParser(object):
@@ -179,9 +180,12 @@ class ChatParser(object):
 
         # Finding the pure message
         text = line[userEnds + 1:].strip()  # text will the text to work an
-        if username in ("EVE-System", "EVE System"):
+        if username in ("EVE-System", "EVE System", "EVE系统"):
             if ":" in text:
                 system = text.split(":")[1].strip().replace("*", "").upper()
+                status = states.LOCATION
+            elif "：" in text:
+                system = text.split("：")[1].strip().replace("*", "").upper()
                 status = states.LOCATION
             else:
                 # We could not determine if the message was system-change related

@@ -5,10 +5,10 @@ app_name = 'vintel'
 block_cipher = None
 
 a = Analysis(['vintel.py'],
-             pathex=['z:\\mark\\code\\vintel\\src' if sys.platform == 'win32' else '/Users/mark/code/vintel/src'],
-             binaries=None,
+             pathex=['D:\\Github\\vintel\\src' if sys.platform == 'win32' else '/Users/Android/code/vintel/src'],
+             binaries=[('avbin.dll','.')],
              datas=None,
-             hiddenimports=[],
+             hiddenimports=["vi.PanningWebView"],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],

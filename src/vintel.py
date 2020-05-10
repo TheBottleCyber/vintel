@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 ###########################################################################
 #  Vintel - Visual Intel Chat Analyzer									  #
 #  Copyright (C) 2014-15 Sebastian Meyer (sparrow.242.de+eve@gmail.com )  #
@@ -33,7 +34,7 @@ from vi.cache import cache
 from vi.resources import resourcePath
 from vi.cache.cache import Cache
 from PyQt4.QtGui import QApplication, QMessageBox
-
+from vi.soundmanager import SoundManager
 
 def exceptHook(exceptionType, exceptionValue, tracebackObject):
     """
@@ -56,6 +57,10 @@ class Application(QApplication):
     def __init__(self, args):
         super(Application, self).__init__(args)
 
+        # Set coding using UTF-8
+        reload(sys)
+        sys.setdefaultencoding('UTF-8')
+
         # Set up paths
         chatLogDirectory = ""
         if len(sys.argv) > 1:
@@ -72,7 +77,7 @@ class Application(QApplication):
             elif sys.platform.startswith("win32") or sys.platform.startswith("cygwin"):
                 import ctypes.wintypes
                 buf = ctypes.create_unicode_buffer(ctypes.wintypes.MAX_PATH)
-                ctypes.windll.shell32.SHGetFolderPathW(0, 5, 0, 0, buf)
+                ctypes.windll.shell32.SHGetFolderPathW(None, 5, None, 0, buf)
                 documentsPath = buf.value
                 chatLogDirectory = os.path.join(documentsPath, "EVE", "logs", "Chatlogs")
         if not os.path.exists(chatLogDirectory):
@@ -89,6 +94,11 @@ class Application(QApplication):
         vintelLogDirectory = os.path.join(vintelDirectory, "logs")
         if not os.path.exists(vintelLogDirectory):
             os.mkdir(vintelLogDirectory)
+
+        vintelSoundDirectory = os.path.join(vintelDirectory, "sounds")
+        if not os.path.exists(vintelSoundDirectory):
+            os.mkdir(vintelSoundDirectory)
+        SoundManager.soundDirectory = vintelSoundDirectory
 
         splash = QtGui.QSplashScreen(QtGui.QPixmap(resourcePath("vi/ui/res/logo.png")))
 
@@ -131,10 +141,15 @@ class Application(QApplication):
         self.mainWindow.raise_()
         splash.finish(self.mainWindow)
 
+# Remove qt.conf file
+def remove_qt_temporary_files():
+    if os.path.exists('qt.conf'):
+        os.remove('qt.conf')
 
 # The main application
 if __name__ == "__main__":
 
     app = Application(sys.argv)
+    remove_qt_temporary_files()
     sys.exit(app.exec_())
 

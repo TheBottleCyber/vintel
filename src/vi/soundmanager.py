@@ -55,6 +55,7 @@ class SoundManager(six.with_metaclass(Singleton)):
     useDarwinSound = False
     useSpokenNotifications = True
     _soundThread = None
+    soundDirectory = None
 
     def __init__(self):
         self._soundThread = self.SoundThread()
@@ -86,8 +87,13 @@ class SoundManager(six.with_metaclass(Singleton)):
         """ Schedules the work, which is picked up by SoundThread.run()
         """
         if self.soundAvailable and self.soundActive:
+            soundFilename = self.soundDirectory + "/" + name
             if self.useSpokenNotifications:
                 audioFile = None
+            elif os.path.exists(soundFilename + ".mp3"):
+                audioFile = soundFilename + ".mp3"
+            elif os.path.exists(soundFilename + ".wav"):
+                audioFile = soundFilename + ".wav"
             else:
                 audioFile = resourcePath("vi/ui/res/{0}".format(self.SOUNDS[name]))
             self._soundThread.queue.put((audioFile, message, abbreviatedMessage))
