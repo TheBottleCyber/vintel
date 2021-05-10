@@ -66,7 +66,7 @@ class ChatParser(object):
         lines = None
         content = ""
         filename = os.path.basename(path)
-        roomname = filename[:-20]
+        roomname = filename[:-31]
         try:
             with open(path, "r", encoding='utf-16-le') as f:
                 content = f.read()
@@ -206,7 +206,7 @@ class ChatParser(object):
         # EvE names the file like room_20140913_200737.txt, so we don't need
         # the last 20 chars
         filename = os.path.basename(path)
-        roomname = filename[:-20]
+        roomname = filename[:-31]
         if path not in self.fileData:
             # seems eve created a new file. New Files have 12 lines header
             self.fileData[path] = {"lines": 13}
