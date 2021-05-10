@@ -38,13 +38,10 @@ def charnameToId(name):
     """ Uses the EVE API to convert a charname to his ID
     """
     try:
-        url = "https://api.eveonline.com/eve/CharacterID.xml.aspx"
-        content = requests.get(url, params={'names': name}).text
-        soup = BeautifulSoup(content, 'html.parser')
-        rowSet = soup.select("rowset")[0]
-        for row in rowSet.select("row"):
-            if row["name"] == name:
-                return int(row["characterid"])
+        url = "https://esi.evetech.net/latest/search/"
+        content = requests.get(url, params={'categories': 'character', 'strict': True, 'search': name}).text
+        result = json.loads(content)
+        return int(result["character"][0])
 
     except Exception as e:
         logging.error("Exception turning charname to id via API: %s", e)
@@ -81,14 +78,9 @@ def namesToIds(names):
     try:
         # not in cache? asking the EVE API
         if len(apiCheckNames) > 0:
-            url = "https://api.eveonline.com/eve/CharacterID.xml.aspx"
-            content = requests.get(url, params={'names': ','.join(apiCheckNames)}).text
-            soup = BeautifulSoup(content, 'html.parser')
-            rowSet = soup.select("rowset")[0]
-            for row in rowSet.select("row"):
-                data[row["name"]] = row["characterid"]
             # writing the cache
             for name in apiCheckNames:
+                data[name] = charnameToId(name)
                 cacheKey = "_".join(("id", "name", name))
                 cache.putIntoCache(cacheKey, data[name], 60 * 60 * 24 * 365)
     except Exception as e:
