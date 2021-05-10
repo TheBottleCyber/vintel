@@ -2,3 +2,5 @@
 .idea/workspace.xml
 .vs/*
 *.pyproj
+build/
+dist/
