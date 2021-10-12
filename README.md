@@ -9,7 +9,7 @@ Visual intel chat analysis, planning and notification application for [EVE Onlin
 Vintel is written with Python 2.7, using PyQt4 for the application presentation layer, BeautifulSoup4 for SVG parsing, and Pyglet for audio playback.
 
 ### News
-_The current release version of Vintel [can be found here](https://github.com/Xanthos-Eve/vintel/releases). Both Mac and Windows distributions are now available for download with this release._
+_The current release version of Vintel [can be found here](https://github.com/TheBottleCyber/vintel/releases). Both Mac and Windows distributions are now available for download with this release._
 
 Keep up on the latest at the [wiki](https://github.com/Xanthos-Eve/vintel/wiki) or visit our [issues](https://github.com/Xanthos-Eve/vintel/issues) page to see what bugs and features are in the queue.
 
@@ -143,11 +143,3 @@ Do not use the standalone EXE, install the environment and use the sourcecode di
 **Vintel is misbehaving and I dont know why - how can I easily help diagnose problems with Vintel**
 
 Vintel writes its own set of logs to the \Documents\EVE\vintel\vintel directory. A new log is created as the old one fills up to its maximum size setting. Each entry inside the log file is time-stamped. These logs are emitted in real-time so you can watch the changes to the file as you use the app.
-
-**I love Vintel - how can I help?**
-
-If you are technically inclined and have a solid grasp of Python, [contact the project maintainer via email](mailto:xanthos.eve@gmail.com) to see how you can best help out. Alternatively you can find something you want to change and create a pull request to have your changes reviewed and potentially added to the codebase. There have been several great contributions made this way!
-
-**I'm not a coder, how can I help?**
-
-Your feedback is needed! Use the program for a while, then come back [here and create issues](https://github.com/Xanthos-Eve/vintel/issues). Record anything you think about Vintel - bugs, frustrations, and ideas to make it better.

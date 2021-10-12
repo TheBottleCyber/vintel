@@ -1,3 +1,3 @@
 
-VERSION = "1.2.4-WGTT 2021051000"
+VERSION = "1.2.5 Imperium"
 SNAPSHOT = False # set to false when releasing

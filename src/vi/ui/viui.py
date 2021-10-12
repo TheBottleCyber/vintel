@@ -99,7 +99,7 @@ class MainWindow(QtGui.QMainWindow):
         if roomnames:
             roomnames = roomnames.split(",")
         else:
-            roomnames = (u"TheCitadel", u"North Provi Intel", u"North Catch Intel", "North Querious Intel")
+            roomnames = (u"ftn.imperium", u"delve.imperium", u"querios.imperium", "period.imperium")
             self.cache.putIntoCache("room_names", u",".join(roomnames), 60 * 60 * 24 * 365 * 5)
         self.roomnames = roomnames
 
@@ -169,11 +169,10 @@ class MainWindow(QtGui.QMainWindow):
         self.connect(self.showChatAvatarsAction, SIGNAL("triggered()"), self.changeShowAvatars)
         self.connect(self.alwaysOnTopAction, SIGNAL("triggered()"), self.changeAlwaysOnTop)
         self.connect(self.chooseChatRoomsAction, SIGNAL("triggered()"), self.showChatroomChooser)
-        self.connect(self.catchRegionAction, SIGNAL("triggered()"), lambda : self.handleRegionMenuItemSelected(self.catchRegionAction))
-        self.connect(self.providenceRegionAction, SIGNAL("triggered()"), lambda : self.handleRegionMenuItemSelected(self.providenceRegionAction))
         self.connect(self.queriousRegionAction, SIGNAL("triggered()"), lambda : self.handleRegionMenuItemSelected(self.queriousRegionAction))
-        self.connect(self.providenceCatchRegionAction, SIGNAL("triggered()"), lambda : self.handleRegionMenuItemSelected(self.providenceCatchRegionAction))
-        self.connect(self.providenceCatchCompactRegionAction, SIGNAL("triggered()"), lambda : self.handleRegionMenuItemSelected(self.providenceCatchCompactRegionAction))
+        self.connect(self.delveRegionAction, SIGNAL("triggered()"), lambda: self.handleRegionMenuItemSelected(self.delveRegionAction))
+        self.connect(self.fountainRegionAction, SIGNAL("triggered()"), lambda: self.handleRegionMenuItemSelected(self.fountainRegionAction))
+        self.connect(self.periodBasisRegionAction, SIGNAL("triggered()"), lambda: self.handleRegionMenuItemSelected(self.periodBasisRegionAction))
         self.connect(self.chooseRegionAction, SIGNAL("triggered()"), self.showRegionChooser)
         self.connect(self.showChatAction, SIGNAL("triggered()"), self.changeChatVisibility)
         self.connect(self.soundSetupAction, SIGNAL("triggered()"), self.showSoundSetup)
@@ -265,16 +264,11 @@ class MainWindow(QtGui.QMainWindow):
             self.mapView.connect(self.mapView, SIGNAL("linkClicked(const QUrl&)"), self.mapLinkClicked)
 
             # Also set up our app menus
-            if not regionName:
-                self.providenceCatchRegionAction.setChecked(True)
-            elif regionName.startswith("Providencecatch"):
-                self.providenceCatchRegionAction.setChecked(True)
-            elif regionName.startswith("Catch"):
-                self.catchRegionAction.setChecked(True)
-            elif regionName.startswith("Providence"):
-                self.providenceRegionAction.setChecked(True)
-            elif regionName.startswith("Querious"):
-                self.queriousRegionAction.setChecked(True)
+            if not regionName:self.providenceCatchRegionAction.setChecked(True)
+            elif regionName.startswith("Querious"): self.queriousRegionAction.setChecked(True)
+            elif regionName.startswith("Fountain"): self.fountainRegionAction.setChecked(True)
+            elif regionName.startswith("Delve"): self.delveRegionAction.setChecked(True)
+            elif regionName.startswith("Period Basis"): self.periodBasisRegionAction.setChecked(True)
             else:
                 self.chooseRegionAction.setChecked(True)
         self.jumpbridgesButton.setChecked(False)
@@ -617,6 +611,10 @@ class MainWindow(QtGui.QMainWindow):
         self.catchRegionAction.setChecked(False)
         self.providenceRegionAction.setChecked(False)
         self.queriousRegionAction.setChecked(False)
+        self.delveRegionAction.setChecked(False)
+        self.fountainRegionAction.setChecked(False)
+        self.periodBasisRegionAction.setChecked(False)
+
         self.providenceCatchRegionAction.setChecked(False)
         self.providenceCatchCompactRegionAction.setChecked(False)
         self.chooseRegionAction.setChecked(False)

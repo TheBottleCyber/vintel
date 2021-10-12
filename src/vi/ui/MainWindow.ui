@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>936</width>
-    <height>695</height>
+    <width>1317</width>
+    <height>835</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,16 +37,7 @@
       </property>
       <widget class="QWidget" name="mapwidget" native="true">
        <layout class="QGridLayout" name="gridLayout_3">
-        <property name="leftMargin">
-         <number>0</number>
-        </property>
-        <property name="topMargin">
-         <number>0</number>
-        </property>
-        <property name="rightMargin">
-         <number>0</number>
-        </property>
-        <property name="bottomMargin">
+        <property name="margin">
          <number>0</number>
         </property>
         <property name="spacing">
@@ -72,16 +63,7 @@
              </size>
             </property>
             <layout class="QGridLayout" name="gridLayout_5">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
+             <property name="margin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -255,19 +237,10 @@
         <string>All Intel (past 20 minutes)</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_6">
-        <property name="leftMargin">
-         <number>5</number>
-        </property>
-        <property name="topMargin">
-         <number>5</number>
-        </property>
-        <property name="rightMargin">
-         <number>5</number>
-        </property>
-        <property name="bottomMargin">
-         <number>5</number>
-        </property>
         <property name="horizontalSpacing">
+         <number>5</number>
+        </property>
+        <property name="margin">
          <number>5</number>
         </property>
         <item row="1" column="0">
@@ -340,8 +313,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>936</width>
-     <height>22</height>
+     <width>1317</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
@@ -376,12 +349,11 @@
     <property name="title">
      <string>Region</string>
     </property>
-    <addaction name="catchRegionAction"/>
-    <addaction name="providenceRegionAction"/>
+    <addaction name="fountainRegionAction"/>
     <addaction name="queriousRegionAction"/>
+    <addaction name="delveRegionAction"/>
+    <addaction name="periodBasisRegionAction"/>
     <addaction name="separator"/>
-    <addaction name="providenceCatchRegionAction"/>
-    <addaction name="providenceCatchCompactRegionAction"/>
     <addaction name="chooseRegionAction"/>
     <addaction name="separator"/>
     <addaction name="jumpbridgeDataAction"/>
@@ -473,7 +445,7 @@
     <bool>true</bool>
    </property>
    <property name="checked">
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Auto KOS-Check Clipboard</string>
@@ -639,12 +611,45 @@
     <string>querious</string>
    </property>
   </action>
+  <action name="delveRegionAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Delve</string>
+   </property>
+   <property name="regionName" stdset="0">
+    <string>delve</string>
+   </property>
+  </action>
+  <action name="fountainRegionAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Fountain</string>
+   </property>
+   <property name="regionName" stdset="0">
+    <string>fountain</string>
+   </property>
+  </action>
+  <action name="periodBasisRegionAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Period Basis</string>
+   </property>
+   <property name="regionName" stdset="0">
+    <string>period_basis</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>QWebView</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>QtWebKit/QWebView</header>
   </customwidget>
   <customwidget>
    <class>PanningWebView</class>
